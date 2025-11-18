@@ -1,21 +1,18 @@
 #!/bin/bash
-# Minimal Jenkins installer for Ubuntu
-set -eux
-
-# Update and install Java (Jenkins requirement)
-apt-get update -y
-apt-get install -y openjdk-11-jdk wget gnupg2
-
-# Add Jenkins repo and key
-wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | apt-key add -
-sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
-
-apt-get update -y
-apt-get install -y jenkins
-
-# Start Jenkins
-systemctl enable jenkins
-systemctl start jenkins
-
-# Print Jenkins status
-systemctl status jenkins || true
+sudo apt-get update
+yes | sudo apt install openjdk-11-jdk-headless
+echo "Waiting for 30 seconds before installing the jenkins package..."
+sleep 30
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt-get update
+yes | sudo apt-get install jenkins
+sleep 30
+echo "Waiting for 30 seconds before installing the Terraform..."
+wget https://releases.hashicorp.com/terraform/1.6.5/terraform_1.6.5_linux_386.zip
+yes | sudo apt-get install unzip
+unzip 'terraform*.zip'
+sudo mv terraform /usr/local/bin/

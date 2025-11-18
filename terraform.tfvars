@@ -10,4 +10,4 @@ ap_availability_zone = ["ap-south-1a", "ap-south-1b"]
 
 
 public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMo3ceksw5fA3kr5klINqKPgxPzMdl8YKkejKQP/+Z5R Rutwik.s@Rutwik"
-ec2_ami_id = "ami-0694d931cee176e7d"
+ec2_ami_id = "ami-02b8269d5e85954ef"
