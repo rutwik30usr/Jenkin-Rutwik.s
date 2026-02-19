@@ -1,5 +1,5 @@
 module "networking" {
-  source               = "./networking"
+  source               = "../../networking"
   vpc_cidr             = var.vpc_cidr
   vpc_name             = var.vpc_name
   cidr_public_subnet   = var.cidr_public_subnet
@@ -9,22 +9,27 @@ module "networking" {
 
 
 module "securitygroups" {
-  source              = "./securitygroups"
+  source              = "../../securitygroups"
   ec2_sg_name         = "SG for EC2 to enable SSH(22), HTTPS(443) and HTTP(80)"
   vpc_id              = module.networking.dev_proj_1_vpc_id
   ec2_jenkins_sg_name = "Allow port 8080 for jenkins"
 }
 
 
-
 module "ec2resource" {
-  source                    = "./ec2resource"
+  source                    = "../../ec2resource"
   ami_id                    = var.ec2_ami_id
-  instance_type             = "t3.micro"
-  tag_name                  = "Jenkins:Ubuntu Linux EC2"
+  instance_type             = var.Instance_types
+  tag_name                  = var.local_tags
   public_key                = var.public_key
   subnet_id                 = tolist(module.networking.dev_proj_1_public_subnets)[0]
   sg_for_jenkins            = [module.securitygroups.sg_ec2_sg_ssh_http_id, module.securitygroups.sg_ec2_jenkins_port_8080]
   enable_public_ip_address  = true
-  user_data_install_jenkins = templatefile("./jenkins-runner-script/jenkins-installer.sh", {})
+  user_data_install_jenkins = templatefile("../../jenkins-runner-script/jenkins-installer.sh", {})
+
 }
+
+
+
+
+

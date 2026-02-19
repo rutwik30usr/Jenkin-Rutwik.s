@@ -31,12 +31,8 @@ variable "ap_availability_zone" {
   description = "Availability Zones"
 }
 
-variable "ec2_ami_id" {
-  type        = string
-  description = "AMI id for EC2 instances"
-}
 
-variable "public_key" {
-  type        = string
-  description = "Public SSH key for EC2 key pair"
-}
+variable "ec2_ami_id" {}
+variable "Instance_types" {}
+variable "local_tags" {}
+variable "public_key" {}

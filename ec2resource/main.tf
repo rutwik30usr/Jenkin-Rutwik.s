@@ -1,12 +1,3 @@
-variable "ami_id" {}
-variable "instance_type" {}
-variable "tag_name" {}
-variable "public_key" {}
-variable "subnet_id" {}
-variable "sg_for_jenkins" {}
-variable "enable_public_ip_address" {}
-variable "user_data_install_jenkins" {}
-
 output "ssh_connection_string_for_ec2" {
   value = format("%s%s", "ssh -i C:/Users/Rutwik.s/.ssh/aws-key.pem ubuntu@", aws_instance.jenkins_ec2_instance_ip.public_ip)
 }
