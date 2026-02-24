@@ -15,6 +15,7 @@ on:
         required: true
         type: choice
         options:
+          - plan
           - apply
           - destroy
 
@@ -68,4 +69,3 @@ jobs:
       - name: Failure Message
         if: failure()
         run: echo "❌ Terraform ${{ github.event.inputs.action }} FAILED for ${{ github.event.inputs.environment }}"
-        
