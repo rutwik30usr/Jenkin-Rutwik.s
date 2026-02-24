@@ -23,9 +23,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Show Selected Environment
-        run: echo "Planning Terraform for environment: ${{ github.event.inputs.environment }}"
-
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
