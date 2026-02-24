@@ -17,13 +17,12 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./terraform/${{ github.event.inputs.environment }}
+        working-directory: ./environment/${{ github.event.inputs.environment }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # ✅ Correct AWS authentication step
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
@@ -31,7 +30,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-south-1
 
-      # ✅ Setup Terraform (no AWS keys here)
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
@@ -46,5 +44,3 @@ jobs:
 
       - name: Terraform Plan
         run: terraform plan
-
-        
