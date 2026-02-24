@@ -16,7 +16,7 @@ jobs:
     name: Apply - ${{ github.event.inputs.environment }}
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.environment }}
-
+  
     defaults:
       run:
         working-directory: ./environment/${{ github.event.inputs.environment }}
