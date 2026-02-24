@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Configure AWS
-        uses: aws-actions/configure-aws-credentials@v3
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -43,7 +43,7 @@ jobs:
         run: terraform plan -out=tfplan
 
       - name: Upload Plan Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: tfplan
           path: ./environment/${{ github.event.inputs.environment }}/tfplan
@@ -61,7 +61,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Configure AWS
         uses: aws-actions/configure-aws-credentials@v3
@@ -77,7 +77,7 @@ jobs:
         run: terraform init
 
       - name: Download Plan Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: tfplan
 
